@@ -27,12 +27,13 @@ var Zap = {
             'refund_succeeded' : 'refund.succeeded',
             'refund_failed' : 'refund.failed'
         };
+
+        // 'bundle.event' is the value set in 'Webhook: Event Name' trigger
         var _evt = EVENTS[bundle.event];
-        console.log('pre_subscribe: mapping bundle.event ', bundle.event,
-         ' to ', _evt);
-        bundle.request.data = JSON.stringify({
+        console.log('mapping bundle.event ', bundle.event, ' to ', _evt);
+        bundle.request.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        bundle.request.data = $.param({
             'url': bundle.target_url,
-            // set in 'Webhook: Event Name' trigger definition
             'event_types': [_evt]
         });
         return bundle.request;
