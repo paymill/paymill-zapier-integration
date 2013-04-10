@@ -57,7 +57,7 @@ var Zap = {
      */
     pre_unsubscribe: function(bundle) {
         bundle.request.url = bundle.request.url + '/' +
-         bundle.subscribe_data.id;
+         bundle.subscribe_data.data.id;
         bundle.request.method = 'DELETE';
         return bundle.request;
     }
