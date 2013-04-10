@@ -70,11 +70,16 @@ var Zap = {
      */
     trigger_transaction_succeeded_post_poll: function(bundle) {
         results = JSON.parse(bundle.response.content);
-        // Return event object on case of response Web Hook event response
-        // as sample data includes only the Subscription or Transaction object
-        if (results.event) {
-            return results.event.event_resource;
-        }
-        return results;
+        // Return 1st payment (when payment are polled as sample data)
+        return results.data[0];
+    },
+    /**
+     * Hook for exposing only the 'event_resource' object of the Web Hook event
+     *
+     * @param  {Object} bundle Zapier bundle.
+     * @return {Object}        Response Data.
+     */
+    trigger_transaction_succeeded_catch_hook: function(bundle) {
+        return bundle.cleaned_request.event.event_resource;
   }
 };
