@@ -31,7 +31,8 @@ var Zap = {
         // 'bundle.event' is the value set in 'Webhook: Event Name' trigger
         var _evt = EVENTS[bundle.event];
         console.log('mapping bundle.event ', bundle.event, ' to ', _evt);
-        bundle.request.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        bundle.request.headers['Content-Type'] =
+         'application/x-www-form-urlencoded';
         bundle.request.data = $.param({
             'url': bundle.target_url,
             'event_types': [_evt]
@@ -60,5 +61,20 @@ var Zap = {
          bundle.subscribe_data.data.id;
         bundle.request.method = 'DELETE';
         return bundle.request;
-    }
+    },
+    /**
+     * Hook for exposing only the 'event_resource' object of the Web Hook event
+     *
+     * @param  {Object} bundle Zapier bundle.
+     * @return {Object}        Response Data.
+     */
+    trigger_transaction_succeeded_post_poll: function(bundle) {
+        results = JSON.parse(bundle.response.content);
+        // Return event object on case of response Web Hook event response
+        // as sample data includes only the Subscription or Transaction object
+        if (results.event) {
+            return results.event.event_resource;
+        }
+        return results;
+  }
 };
