@@ -33,7 +33,7 @@ var Zap = {
         bundle.request.data = JSON.stringify({
             'url': bundle.target_url,
             // set in 'Webhook: Event Name' trigger definition
-            'event_types[]': [_evt]
+            'event_types': [_evt]
         });
         return bundle.request;
     },

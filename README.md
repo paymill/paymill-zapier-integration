@@ -1,13 +1,20 @@
+Paymill's Zapier  Integration
+=============================
+
 Paymill App
 -----------
 
-# Create new Service on https://zapier.com/developer/app/create/
+**Create new Service**
+
+https://zapier.com/developer/app/create/
 
 Title: Paymill
+
 Description: Integration with Paymill Payments API
+
 Image: <a square PNG, example 64x64>
 
-# Setup Auth Field
+**Setup Auth Field**
 
 Label: Private Key
 Key: private_key
@@ -31,11 +38,25 @@ REST Hook Unsubscribe URL: https://api.paymill.com/v2/webhooks
 # Add Trigger: New Transaction (transaction.created)
 
 Label: New Transaction
-Key: trigger_new_trx
+Key: trigger_new_transaction
 Help Text: Triggers when a new Payment Transaction is created.
 
 
 pre_subscribe:
+
+
+
+Hip CHat Zap
+------------
+
+Trigger Service 1: Paymill
+Trigger: New Transaction
+
+Trigger Service 2: Hipchat
+Trigger: Create Message
+
+
+
 
 
 
