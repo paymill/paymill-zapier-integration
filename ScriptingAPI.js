@@ -71,7 +71,7 @@ var Zap = {
     trigger_transaction_succeeded_post_poll: function(bundle) {
         results = JSON.parse(bundle.response.content);
         // Return 1st payment (when payment are polled as sample data)
-        return results.data[0];
+        return (results.data && results.data[0]) || [];
     },
     /**
      * Hook for exposing only the 'event_resource' object of the Web Hook event
