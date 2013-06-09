@@ -58,7 +58,7 @@ var Zap = {
      */
     pre_unsubscribe: function(bundle) {
         bundle.request.url = bundle.request.url + '/' +
-         bundle.subscribe_data.data.id;
+        bundle.subscribe_data.data.id;
         bundle.request.method = 'DELETE';
         return bundle.request;
     },
@@ -69,7 +69,11 @@ var Zap = {
      * @return {Object}        Response Data.
      */
     trigger_transaction_succeeded_post_poll: function(bundle) {
-        results = JSON.parse(bundle.response.content);
+        var results = JSON.parse(bundle.response.content);
+        results.data.map(function(result) {
+           return Zap.convert_precision(result);
+        });
+
         // Return 1st payment (when payment are polled as sample data)
         return (results.data && results.data[0]) || [];
     },
@@ -80,6 +84,11 @@ var Zap = {
      * @return {Object}        Response Data.
      */
     trigger_transaction_succeeded_catch_hook: function(bundle) {
-        return bundle.cleaned_request.event.event_resource;
+        return Zap.convert_precision(bundle.cleaned_request.event.event_resource);
+  },
+  
+  convert_precision: function(result) {
+        result.precision_amount = (parseInt(result.amount, 10) / 100).toFixed(2);  
+        return result;
   }
 };
