@@ -36,7 +36,7 @@ and finally set a title and make it live
 
 ![step 7 image](images/step7.jpg "step 7 image")
 
-That's it! When new payments are fullfiled on your PAYMILL account, you'll get a notification through Pushover:
+That's it! When new payments are fullfiled on your PAYMILL account, you'll get a notification through Pushover
 
 ![android notification](images/android-notification.jpg "android notification")
 
